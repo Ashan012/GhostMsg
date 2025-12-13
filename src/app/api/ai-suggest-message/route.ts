@@ -12,7 +12,7 @@ export async function POST(req: Request) {
       prompt,
     });
 
-    return NextResponse.json({ success: true, text }, { status: 200 });
+    return NextResponse.json({ success: true, message: text }, { status: 200 });
   } catch (error) {
     console.error(error);
     NextResponse.json({ success: false, message: error }, { status: 500 });

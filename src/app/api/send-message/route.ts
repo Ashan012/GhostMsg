@@ -6,6 +6,17 @@ export async function POST(request: Request) {
   await dbConnect();
 
   const { username, content } = await request.json();
+  if (!username || !content) {
+    return Response.json(
+      {
+        success: false,
+        message: "username and content is required",
+      },
+      {
+        status: 400,
+      }
+    );
+  }
   try {
     const user = await UserModel.findOne({ username });
     console.log("user====>", user);
@@ -13,7 +24,7 @@ export async function POST(request: Request) {
       return Response.json(
         {
           success: false,
-          message: "user not found in a database",
+          message: "User Not Found",
         },
         {
           status: 404,
@@ -42,7 +53,7 @@ export async function POST(request: Request) {
         message: "sent message successfully",
       },
       {
-        status: 401,
+        status: 201,
       }
     );
   } catch (error) {
@@ -50,7 +61,7 @@ export async function POST(request: Request) {
     return Response.json(
       {
         success: false,
-        message: "user not found",
+        message: "User Not Found",
       },
       {
         status: 404,

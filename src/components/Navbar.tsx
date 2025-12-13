@@ -3,24 +3,12 @@ import { SessionProvider, signOut, useSession } from "next-auth/react";
 import { User } from "next-auth";
 import { useEffect, useState } from "react";
 
-function NavBarContent() {
-  const [authenticated, setAuthenticated] = useState(false);
-  const [username, setUsername]: any = useState("");
-  const { data: session, status } = useSession();
-  const user: User = session?.user as User;
-
-  useEffect(() => {
-    if (status === "authenticated") {
-      setAuthenticated(true);
-      setUsername(user?.username);
-    }
-  }, [status]);
-
+export default function NavBarContent({ username, authenticated }: any) {
   return (
     <nav className="w-full bg-white shadow-md py-4 px-6">
       <div className="max-w-6xl mx-auto flex justify-between items-center">
         {/* Brand */}
-        <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+        <h1 className="text-2xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
           Random Message
         </h1>
 
@@ -47,13 +35,5 @@ function NavBarContent() {
         </div>
       </div>
     </nav>
-  );
-}
-
-export default function NavBar() {
-  return (
-    <SessionProvider>
-      <NavBarContent />
-    </SessionProvider>
   );
 }

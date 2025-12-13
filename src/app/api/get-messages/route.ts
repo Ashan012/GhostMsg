@@ -10,7 +10,7 @@ export async function GET(request: Request) {
 
   const session = await getServerSession(authOptions);
 
-  const user = session?.user;
+  const currentUser = session?.user;
 
   if (!session || !session.user) {
     return Response.json(
@@ -24,47 +24,51 @@ export async function GET(request: Request) {
     );
   }
 
-  const userId = new mongoose.Types.ObjectId(user?._id);
-
   try {
-    const userMessages = await UserModel.aggregate([
-      {
-        $match: {
-          _id: userId,
-        },
-      },
-      { $unwind: "$messages" },
-      {
-        $sort: {
-          "messages.CreatedAt": -1,
-        },
-      },
-      {
-        $group: {
-          _id: "$_id",
-          messages: {
-            $push: "$messages",
-          },
-        },
-      },
-    ]);
+    // const userMessages = await UserModel.aggregate([
+    //   {
+    //     $match: {
+    //       _id: userId,
+    //     },
+    //   },
+    //   { $unwind: "$messages" },
+    //   {
+    //     $sort: {
+    //       "messages.CreatedAt": -1,
+    //     },
+    //   },
+    //   {
+    //     $group: {
+    //       _id: "$_id",
+    //       messages: {
+    //         $push: "$messages",
+    //       },
+    //     },
+    //   },
+    // ]);
 
-    if (!userMessages || userMessages.length === 0) {
+    // if (!userMessages || userMessages.length === 0) {
+    //   return Response.json(
+    //     {
+    //       success: "false",
+    //       message: "User message not found",
+    //     },
+    //     { status: 401 }
+    //   );
+    // }
+    const user = await UserModel.findById(currentUser?._id);
+
+    if (user) {
+      const userMessages = user?.message;
+
       return Response.json(
         {
-          success: "false",
-          message: "User message not found",
+          success: "true",
+          message: userMessages,
         },
-        { status: 401 }
+        { status: 200 }
       );
     }
-    return Response.json(
-      {
-        success: "true",
-        messages: userMessages[0].messages,
-      },
-      { status: 200 }
-    );
   } catch (error) {
     console.error(error);
     return Response.json(
