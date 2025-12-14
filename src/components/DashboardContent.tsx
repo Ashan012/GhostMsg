@@ -11,7 +11,7 @@ export default function DashboardContent({
   isAcceptingMessage,
 }: any) {
   const [acceptMessage, setAcceptMessage] = useState(isAcceptingMessage);
-  const url = `https://ghostmysg.vercel.app//u/${username}`;
+  const url = `https://ghostmysg.vercel.app/u/${username}`;
 
   const handleCopy = async () => {
     try {
