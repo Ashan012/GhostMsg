@@ -34,7 +34,14 @@ export default function Page() {
           <DisplayMessage authenticated={authenticated} />
         </div>
       ) : (
-        <h1>loading....</h1>
+        <div className="min-h-screen flex items-center justify-center bg-gray-50">
+          <div className="w-full max-w-md space-y-4 animate-pulse">
+            <div className="h-10 bg-gray-300 rounded-md" />
+            <div className="h-24 bg-gray-300 rounded-md" />
+            <div className="h-24 bg-gray-300 rounded-md" />
+            <div className="h-10 bg-gray-300 rounded-md w-1/2 mx-auto" />
+          </div>
+        </div>
       )}
     </div>
   );

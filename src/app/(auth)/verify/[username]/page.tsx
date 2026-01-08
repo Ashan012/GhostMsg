@@ -38,8 +38,13 @@ function VerifyAccount() {
   const onSubmit = async (data: VerifyFormData) => {
     setLoading(true);
     try {
-      await axios.post<ApiResponse>("/api/verify-code", { ...data, username });
-      router.replace("/sign-in");
+      const response = await axios.post<ApiResponse>("/api/verify-code", {
+        ...data,
+        username,
+      });
+      if (response) {
+        router.replace("/sign-in");
+      }
     } catch (error: any) {
       toast.warning(error.response?.data?.message || "Something went wrong");
     } finally {

@@ -75,8 +75,6 @@ export default function Page() {
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            {/* USERNAME */}
-
             {/* EMAIL */}
             <FormField
               control={form.control}
@@ -147,9 +145,9 @@ export default function Page() {
         </Form>
 
         <p className="text-center text-gray-300">
-          Already have an account?{" "}
-          <Link className="text-indigo-400 hover:underline" href="/sign-in">
-            Sign In
+          Create your account
+          <Link className="text-indigo-400 hover:underline" href="/sign-up">
+            Sign up
           </Link>
         </p>
       </div>

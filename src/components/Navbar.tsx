@@ -9,7 +9,7 @@ export default function NavBarContent({ username, authenticated }: any) {
       <div className="max-w-6xl mx-auto flex justify-between items-center">
         {/* Brand */}
         <h1 className="text-2xl font-bold bg-linear-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-          Random Message
+          Anonymous Feedback
         </h1>
 
         {/* Right Section */}

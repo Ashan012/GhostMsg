@@ -11,7 +11,9 @@ export default function Home() {
     <div className="min-h-screen bg-gray-900 text-white flex flex-col">
       {/* Navbar */}
       <nav className="flex justify-between items-center p-6 max-w-6xl mx-auto w-full">
-        <h1 className="text-2xl font-bold text-indigo-500">GhostMsg</h1>
+        <h1 className="text-2xl font-bold text-indigo-500">
+          Anonymous Feedback
+        </h1>
         <div className="space-x-4 text-gray-300">
           <a href="/sign-up" className="hover:text-indigo-400">
             Get Started

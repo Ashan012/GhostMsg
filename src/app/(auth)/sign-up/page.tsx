@@ -84,7 +84,7 @@ export default function Page() {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-4">
+    <div className="min-h-screen flex justify-center items-center bg-linear-to-br from-gray-900 via-gray-800 to-gray-900 p-4">
       <div className="w-full max-w-md p-8 space-y-8 rounded-2xl shadow-2xl backdrop-blur-xl bg-white/10 border border-white/20">
         <div className="text-center">
           <h1 className="text-4xl font-extrabold tracking-tight text-white drop-shadow">
@@ -214,9 +214,9 @@ export default function Page() {
         </Form>
 
         <p className="text-center text-gray-300">
-          Already have an account?{" "}
+          Already have an account?
           <Link className="text-indigo-400 hover:underline" href="/sign-in">
-            Sign In
+            Sign up
           </Link>
         </p>
       </div>
