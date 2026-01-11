@@ -4,7 +4,7 @@ import { Switch } from "@/components/ui/switch";
 import { ApiResponse } from "@/types/ApiResponse";
 import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
-import { toast } from "sonner"; // optional, agar Sonner use kar rahe ho
+import { toast } from "sonner";
 
 export default function DashboardContent({
   username,
@@ -16,7 +16,7 @@ export default function DashboardContent({
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(url);
-      toast.success("URL copied!"); // agar Sonner use ho
+      toast.success("URL copied!");
     } catch (err) {
       toast.error("Failed to copy!");
     }
