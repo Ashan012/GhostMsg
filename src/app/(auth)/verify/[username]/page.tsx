@@ -43,6 +43,7 @@ function VerifyAccount() {
         username,
       });
       if (response) {
+        toast.success("Account verified successfully!");
         router.replace("/sign-in");
       }
     } catch (error: any) {
@@ -53,12 +54,12 @@ function VerifyAccount() {
   };
 
   return (
-    <div className="flex h-screen items-center justify-center bg-gray-900 px-4">
-      <div className="w-full max-w-md rounded-2xl border border-gray-700 bg-gray-800 p-8 shadow-lg">
-        <h2 className="text-2xl font-semibold text-center text-white mb-2">
+    <div className="flex h-screen items-center justify-center bg-gray-50 px-4">
+      <div className="w-full max-w-md rounded-2xl border border-gray-200 bg-white p-8 shadow-lg">
+        <h2 className="text-2xl font-semibold text-center text-gray-800 mb-2">
           Verify Account
         </h2>
-        <p className="text-center text-gray-400 mb-6 text-sm">
+        <p className="text-center text-gray-600 mb-6 text-sm">
           Enter the 6-digit verification code sent to your email/phone.
         </p>
 
@@ -69,7 +70,7 @@ function VerifyAccount() {
               name="verifyCode"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-200">
+                  <FormLabel className="text-gray-700">
                     Verification Code
                   </FormLabel>
                   <FormControl>
@@ -79,21 +80,25 @@ function VerifyAccount() {
                           <InputOTPSlot
                             key={i}
                             index={i}
-                            className="bg-gray-700 text-white border-gray-600 focus:border-blue-500"
+                            className="bg-gray-100 text-gray-800 border border-gray-300 focus:border-indigo-500"
                           />
                         ))}
                       </InputOTPGroup>
                     </InputOTP>
                   </FormControl>
-                  <FormDescription className="text-xs text-gray-400">
+                  <FormDescription className="text-xs text-gray-500">
                     Please enter the 6-digit code we sent.
                   </FormDescription>
-                  <FormMessage className="text-red-400" />
+                  <FormMessage className="text-red-500" />
                 </FormItem>
               )}
             />
 
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button
+              type="submit"
+              className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl"
+              disabled={loading}
+            >
               {loading ? "Verifying..." : "Verify"}
             </Button>
           </form>

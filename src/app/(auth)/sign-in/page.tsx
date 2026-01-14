@@ -3,12 +3,13 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { useDebounceCallback } from "usehooks-ts";
+import { useState } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import axios, { AxiosError } from "axios";
+import { signIn } from "next-auth/react";
+import { signInSchema } from "@/Schema/signInSchema";
 import { ApiResponse } from "@/types/ApiResponse";
+import { AxiosError } from "axios";
 
 import {
   Form,
@@ -21,9 +22,7 @@ import {
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Loader2, UserPlus, Mail, Lock } from "lucide-react";
-import { signInSchema } from "@/Schema/signInSchema";
-import { signIn } from "next-auth/react";
+import { Loader2, Mail, Lock } from "lucide-react";
 
 export default function Page() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -38,51 +37,49 @@ export default function Page() {
   });
 
   const onSubmit = async (data: any) => {
-    if (data) {
-      try {
-        setIsSubmitting(true);
-        const response = await signIn("credentials", {
-          redirect: false,
-          identifier: data.identifier,
-          password: data.password,
-        });
+    try {
+      setIsSubmitting(true);
+      const response = await signIn("credentials", {
+        redirect: false,
+        identifier: data.identifier,
+        password: data.password,
+      });
 
-        if (response?.url) {
-          toast.success("Login Successfully");
-          router.replace(`/dashboard`);
-        }
-      } catch (error) {
-        let axiosError = error as AxiosError<ApiResponse>;
-        toast.error(axiosError.response?.data.message);
-        console.log(axiosError);
-      } finally {
-        setIsSubmitting(false);
+      if (response?.url) {
+        toast.success("Login Successfully");
+        router.replace(`/dashboard`);
       }
+    } catch (error) {
+      const axiosError = error as AxiosError<ApiResponse>;
+      toast.error(axiosError.response?.data.message || "Something went wrong");
+      console.log(axiosError);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 p-4">
-      <div className="w-full max-w-md p-8 space-y-8 rounded-2xl shadow-2xl backdrop-blur-xl bg-white/10 border border-white/20">
+    <div className="min-h-screen flex justify-center items-center bg-gray-50 p-4">
+      <div className="w-full max-w-md p-8 space-y-8 rounded-2xl shadow-lg bg-white border border-gray-200">
         <div className="text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight text-white drop-shadow">
+          <h1 className="text-4xl font-extrabold tracking-tight text-gray-800">
             Login Your Account
           </h1>
-          <p className="text-gray-300 mt-2">
+          <p className="text-gray-600 mt-2">
             Join True Feedback & begin your anonymous journey
           </p>
         </div>
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            {/* EMAIL */}
+            {/* EMAIL/USERNAME */}
             <FormField
               control={form.control}
               name="identifier"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-200">
-                    Email/username
+                  <FormLabel className="text-gray-700">
+                    Email / Username
                   </FormLabel>
                   <FormControl>
                     <div className="relative">
@@ -92,8 +89,8 @@ export default function Page() {
                       />
                       <Input
                         required
-                        className="pl-10 bg-white/20 text-white border-white/30 placeholder-gray-300"
                         placeholder="Enter email or username"
+                        className="pl-10 bg-gray-100 text-gray-800 border border-gray-300 placeholder-gray-400"
                         {...field}
                       />
                     </div>
@@ -109,7 +106,7 @@ export default function Page() {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-200">Password</FormLabel>
+                  <FormLabel className="text-gray-700">Password</FormLabel>
                   <FormControl>
                     <div className="relative">
                       <Lock
@@ -119,8 +116,8 @@ export default function Page() {
                       <Input
                         type="password"
                         required
-                        className="pl-10 bg-white/20 text-white border-white/30 placeholder-gray-300"
                         placeholder="Enter password"
+                        className="pl-10 bg-gray-100 text-gray-800 border border-gray-300 placeholder-gray-400"
                         {...field}
                       />
                     </div>
@@ -144,9 +141,9 @@ export default function Page() {
           </form>
         </Form>
 
-        <p className="text-center text-gray-300">
-          Create your account
-          <Link className="text-indigo-400 hover:underline" href="/sign-up">
+        <p className="text-center text-gray-600">
+          Create your account?{" "}
+          <Link className="text-indigo-600 hover:underline" href="/sign-up">
             Sign up
           </Link>
         </p>

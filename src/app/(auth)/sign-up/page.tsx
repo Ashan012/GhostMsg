@@ -84,13 +84,13 @@ export default function Page() {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-linear-to-br from-gray-900 via-gray-800 to-gray-900 p-4">
-      <div className="w-full max-w-md p-8 space-y-8 rounded-2xl shadow-2xl backdrop-blur-xl bg-white/10 border border-white/20">
+    <div className="min-h-screen flex justify-center items-center bg-gray-50 p-4">
+      <div className="w-full max-w-md p-8 space-y-8 rounded-2xl shadow-lg bg-white border border-gray-200">
         <div className="text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight text-white drop-shadow">
+          <h1 className="text-4xl font-extrabold tracking-tight text-gray-800">
             Create Account
           </h1>
-          <p className="text-gray-300 mt-2">
+          <p className="text-gray-600 mt-2">
             Join True Feedback & begin your anonymous journey
           </p>
         </div>
@@ -103,7 +103,7 @@ export default function Page() {
               name="username"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-200">Username</FormLabel>
+                  <FormLabel className="text-gray-700">Username</FormLabel>
                   <FormControl>
                     <div className="relative">
                       <UserPlus
@@ -112,7 +112,7 @@ export default function Page() {
                       />
                       <Input
                         required
-                        className="pl-10 bg-white/20 text-white border-white/30 placeholder-gray-300"
+                        className="pl-10 bg-gray-100 text-gray-800 border border-gray-300 placeholder-gray-400"
                         placeholder="Enter username"
                         {...field}
                         onChange={(e) => {
@@ -125,7 +125,7 @@ export default function Page() {
 
                   {isCheckingUsername && (
                     <Loader2
-                      className="animate-spin text-white mt-1"
+                      className="animate-spin text-gray-500 mt-1"
                       size={20}
                     />
                   )}
@@ -134,8 +134,8 @@ export default function Page() {
                     <p
                       className={`mt-1 ${
                         usernameMessage === "Username is unique"
-                          ? "text-green-400"
-                          : "text-red-400"
+                          ? "text-green-600"
+                          : "text-red-600"
                       }`}
                     >
                       {usernameMessage}
@@ -152,7 +152,7 @@ export default function Page() {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-200">Email</FormLabel>
+                  <FormLabel className="text-gray-700">Email</FormLabel>
                   <FormControl>
                     <div className="relative">
                       <Mail
@@ -161,7 +161,7 @@ export default function Page() {
                       />
                       <Input
                         required
-                        className="pl-10 bg-white/20 text-white border-white/30 placeholder-gray-300"
+                        className="pl-10 bg-gray-100 text-gray-800 border border-gray-300 placeholder-gray-400"
                         placeholder="Enter email"
                         {...field}
                       />
@@ -178,7 +178,7 @@ export default function Page() {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-200">Password</FormLabel>
+                  <FormLabel className="text-gray-700">Password</FormLabel>
                   <FormControl>
                     <div className="relative">
                       <Lock
@@ -188,7 +188,7 @@ export default function Page() {
                       <Input
                         type="password"
                         required
-                        className="pl-10 bg-white/20 text-white border-white/30 placeholder-gray-300"
+                        className="pl-10 bg-gray-100 text-gray-800 border border-gray-300 placeholder-gray-400"
                         placeholder="Enter password"
                         {...field}
                       />
@@ -213,10 +213,10 @@ export default function Page() {
           </form>
         </Form>
 
-        <p className="text-center text-gray-300">
-          Already have an account?
-          <Link className="text-indigo-400 hover:underline" href="/sign-in">
-            Sign up
+        <p className="text-center text-gray-600">
+          Already have an account?{" "}
+          <Link className="text-indigo-600 hover:underline" href="/sign-in">
+            Sign in
           </Link>
         </p>
       </div>
